@@ -1,0 +1,17 @@
+services:
+  wpp-bot:
+    restart: always
+    env_file:
+      - .env
+    environment:
+      ACCESS_TOKEN: ${ACCESS_TOKEN}
+      APP_ID: ${APP_ID}
+      APP_SECRET: ${APP_SECRET}
+      RECIPIENT_WAID: ${RECIPIENT_WAID}
+      VERSION: ${VERSION}
+      PHONE_NUMBER_ID: ${PHONE_NUMBER_ID}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8001:8080

@@ -1,0 +1,10 @@
+flask
+python-dotenv
+openai
+aiohttp
+asyncio
+
+fastapi
+uvicorn
+pydantic
+requests
