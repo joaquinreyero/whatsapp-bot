@@ -1,11 +1,7 @@
-import json
+from fastapi import Request, HTTPException, APIRouter
 
-from fastapi import Request, HTTPException, Depends, APIRouter, Query
-
-from src.schema.webhook import WebhookPayload
-from src.decorator.security import signature_required
-from src.utils.whatsapp import WhatsAppClient
 from src.config import Settings
+from src.utils.whatsapp import WhatsAppClient
 
 router = APIRouter(
     prefix="/api/v1/webhook",
