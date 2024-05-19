@@ -10,6 +10,7 @@ class Settings:
         self.RECIPIENT_WAID = os.getenv("RECIPIENT_WAID")
         self.VERSION = os.getenv("VERSION")
         self.PHONE_NUMBER_ID = os.getenv("PHONE_NUMBER_ID")
+        self.VERIFY_TOKEN = os.getenv("VERIFY_TOKEN")
 
 
 settings = Settings()

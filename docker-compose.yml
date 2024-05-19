@@ -10,6 +10,7 @@ services:
       RECIPIENT_WAID: ${RECIPIENT_WAID}
       VERSION: ${VERSION}
       PHONE_NUMBER_ID: ${PHONE_NUMBER_ID}
+      VERIFY_TOKEN: ${VERIFY_TOKEN}
     build:
       context: .
       dockerfile: Dockerfile
