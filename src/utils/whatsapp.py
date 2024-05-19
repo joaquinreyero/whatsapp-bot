@@ -4,7 +4,7 @@ import json
 
 
 class WhatsAppClient:
-    API_URL = "https://graph.facebook.com/v15.0/"
+    API_URL = "https://graph.facebook.com/v19.0/"
     WHATSAPP_API_TOKEN = Settings().ACCESS_TOKEN
     WHATSAPP_CLOUD_NUMBER_ID = Settings().PHONE_NUMBER_ID
 
