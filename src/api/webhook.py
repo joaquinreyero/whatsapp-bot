@@ -4,7 +4,7 @@ from fastapi import Request, HTTPException, Depends, APIRouter, Query
 
 from src.schema.webhook import WebhookPayload
 from src.decorator.security import signature_required
-from src.utils.whatsapp import process_whatsapp_message, is_valid_whatsapp_message
+from src.utils.whatsapp import WhatsAppClient
 from src.config import Settings
 
 router = APIRouter(
@@ -13,19 +13,21 @@ router = APIRouter(
 )
 
 
-@router.post("/", dependencies=[Depends(signature_required)])
-async def handle_message(request: Request, payload: WebhookPayload):
-    body = payload.dict()
-    if body.get("entry", [{}])[0].get("changes", [{}])[0].get("value", {}).get("statuses"):
-        return {"status": "ok"}
-    try:
-        if is_valid_whatsapp_message(body):
-            process_whatsapp_message(body)
-            return {"status": "ok"}
-        else:
-            raise HTTPException(status_code=404, detail="Not a WhatsApp API event")
-    except json.JSONDecodeError:
-        raise HTTPException(status_code=400, detail="Invalid JSON provided")
+@router.post("/")
+async def handle_message(request: Request):
+    print("callback is being called")
+    wtsapp_client = WhatsAppClient()
+    data = await request.json()
+    print("We received " + str(data))
+    response = wtsapp_client.process_notification(data)
+    if response["statusCode"] == 200:
+        if response["body"] and response["from_no"]:
+            reply = response["body"]
+            print("\nreply is:" + reply)
+            wtsapp_client.send_text_message(message=reply, phone_number=response["from_no"], )
+            print("\nreply is sent to whatsapp cloud:" + str(response))
+
+    return {"status": "success"}, 200
 
 
 @router.get("/")
