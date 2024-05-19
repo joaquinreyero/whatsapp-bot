@@ -36,6 +36,6 @@ async def verify_webhook(request: Request):
     hub_verify_token = query_params.get('hub.verify_token')
 
     if hub_mode == "subscribe" and hub_verify_token == Settings().VERIFY_TOKEN:
-        return hub_challenge, 200
+        return int(hub_challenge)
     else:
         raise HTTPException(status_code=400, detail="Invalid token or mode")
