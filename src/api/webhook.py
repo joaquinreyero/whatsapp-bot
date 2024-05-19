@@ -1,6 +1,6 @@
 import json
 
-from fastapi import Request, HTTPException, Depends, APIRouter
+from fastapi import Request, HTTPException, Depends, APIRouter, Query
 
 from src.schema.webhook import WebhookPayload
 from src.decorator.security import signature_required
@@ -29,12 +29,8 @@ async def handle_message(request: Request, payload: WebhookPayload):
 
 
 @router.get("/")
-async def verify(hub_mode: str, hub_verify_token: str, hub_challenge: str):
-    config = Settings()
-    if hub_mode and hub_verify_token:
-        if hub_mode == "subscribe" and hub_verify_token == config.VERIFY_TOKEN:
-            return hub_challenge
-        else:
-            raise HTTPException(status_code=403, detail="Verification failed")
+async def verify_webhook(hub_mode: str = Query(...), hub_verify_token: str = Query(...), hub_challenge: str = Query(...)):
+    if hub_mode == "subscribe" and hub_verify_token == Settings().VERIFY_TOKEN:
+        return hub_challenge
     else:
-        raise HTTPException(status_code=400, detail="Missing parameters")
+        raise HTTPException(status_code=400, detail="Invalid token or mode")
