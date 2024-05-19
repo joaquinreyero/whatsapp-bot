@@ -29,7 +29,7 @@ async def handle_message(request: Request, payload: WebhookPayload):
 
 
 @router.get("/")
-async def verify_webhook(hub_mode: str = Query(...), hub_verify_token: str = Query(...), hub_challenge: str = Query(...)):
+async def verify_webhook(hub_mode: str = Query(...), hub_challenge: str = Query(...), hub_verify_token: str = Query(...)):
     if hub_mode == "subscribe" and hub_verify_token == Settings().VERIFY_TOKEN:
         return hub_challenge
     else:
