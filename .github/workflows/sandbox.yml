@@ -53,4 +53,4 @@ jobs:
             --region us-east1 \
             --allow-unauthenticated \
             --project ${{ secrets.PROJECT_ID }} \
-            --update-env-vars ACCESS_TOKEN="${{ secrets.ACCESS_TOKEN }}",APP_ID="${{ secrets.APP_ID }}",APP_SECRET="${{ secrets.APP_SECRET }}",RECIPIENT_WAID="${{ secrets.RECIPIENT_WAID }}",VERSION="${{ secrets.VERSION }}",PHONE_NUMBER_ID="${{ secrets.PHONE_NUMBER_ID }}"
+            --update-env-vars ACCESS_TOKEN="${{ secrets.ACCESS_TOKEN }}",APP_ID="${{ secrets.APP_ID }}",APP_SECRET="${{ secrets.APP_SECRET }}",RECIPIENT_WAID="${{ secrets.RECIPIENT_WAID }}",VERSION="${{ secrets.VERSION }}",PHONE_NUMBER_ID="${{ secrets.PHONE_NUMBER_ID }}",VERIFY_TOKEN="${{ secrets.VERIFY_TOKEN }}"
