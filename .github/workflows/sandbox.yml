@@ -47,7 +47,7 @@ jobs:
 
       - name: Deploy On Google Cloud
         run: |
-          gcloud run deploy backend \
+          gcloud run deploy wpp-bot \
             --image gcr.io/${{ secrets.PROJECT_ID }}/wpp-bot:${{ steps.tag.outputs.tag }} \
             --platform managed \
             --region us-east1 \
