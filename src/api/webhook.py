@@ -12,7 +12,7 @@ router = APIRouter(
 )
 
 
-@router.post("/webhook", dependencies=[Depends(signature_required)])
+@router.post("/", dependencies=[Depends(signature_required)])
 async def handle_message(request: Request, payload: WebhookPayload):
     body = payload.dict()
 
@@ -34,7 +34,7 @@ async def handle_message(request: Request, payload: WebhookPayload):
         raise HTTPException(status_code=400, detail="Invalid JSON provided")
 
 
-@router.get("/webhook")
+@router.get("/")
 async def verify(hub_mode: str, hub_verify_token: str, hub_challenge: str):
     config = router.state.config
     if hub_mode and hub_verify_token:
